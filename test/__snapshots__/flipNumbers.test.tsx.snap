@@ -4,9 +4,10 @@ exports[`FlipNumbers should render correctly 1`] = `
 <section
   aria-label="00:00"
   style={
-    Object {
+    {
       "alignItems": "center",
       "display": "flex",
+      "gap": 2,
       "justifyContent": "center",
     }
   }
@@ -15,33 +16,31 @@ exports[`FlipNumbers should render correctly 1`] = `
     activeNumber={0}
     background="white"
     color="black"
-    delay={0}
+    delay={0.3}
     duration={0.3}
-    height={20}
+    fontSize={20}
     length={5}
-    numberStyle={Object {}}
-    perspective="1000px"
+    numberStyle={{}}
+    perspective={1000}
     play={false}
     position={1}
-    width={20}
   />
   <FlipNumber
     activeNumber={0}
     background="white"
     color="black"
-    delay={0}
+    delay={0.3}
     duration={0.3}
-    height={20}
+    fontSize={20}
     length={5}
-    numberStyle={Object {}}
-    perspective="1000px"
+    numberStyle={{}}
+    perspective={1000}
     play={false}
     position={2}
-    width={20}
   />
   <span
     aria-hidden={true}
-    style=":"
+    style={{}}
   >
     :
   </span>
@@ -49,29 +48,27 @@ exports[`FlipNumbers should render correctly 1`] = `
     activeNumber={0}
     background="white"
     color="black"
-    delay={0}
+    delay={0.3}
     duration={0.3}
-    height={20}
+    fontSize={20}
     length={5}
-    numberStyle={Object {}}
-    perspective="1000px"
+    numberStyle={{}}
+    perspective={1000}
     play={false}
     position={4}
-    width={20}
   />
   <FlipNumber
     activeNumber={0}
     background="white"
     color="black"
-    delay={0}
+    delay={0.3}
     duration={0.3}
-    height={20}
+    fontSize={20}
     length={5}
-    numberStyle={Object {}}
-    perspective="1000px"
+    numberStyle={{}}
+    perspective={1000}
     play={false}
     position={5}
-    width={20}
   />
 </section>
 `;

@@ -1,8 +1,7 @@
-// @flow
 import { Animate } from 'react-simple-animate';
 import React from 'react';
 
-const commonAnimateStyle = {
+const commonAnimateStyle: React.CSSProperties = {
   position: 'absolute',
   height: '100%',
   transformStyle: 'preserve-3d',
@@ -13,29 +12,29 @@ const resetRouteCounter = 1000;
 const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const rotateDegreePerNumber = 36;
 
-type Props = {
-  position: number,
-  length: number,
-  height: number,
-  color: string,
-  background?: string,
-  width: number,
-  perspective: number,
-  duration: number,
-  activeNumber: number,
-  delay: number,
-  play: boolean,
-  numberStyle: Object,
-  className?: string,
-};
+export interface FlipNumberProps {
+  position: number;
+  length: number;
+  fontSize: number;
+  color: string;
+  background?: string;
+  perspective?: number;
+  duration?: number;
+  activeNumber: number;
+  delay?: number;
+  play?: boolean;
+  numberStyle?: React.CSSProperties;
+  className?: string;
+}
 
-type State = {
-  degree: number,
-  rotateCounter: number,
-};
+interface State {
+  degree: number;
+  rotateCounter: number;
+  prevActiveNumber?: number;
+}
 
-const calculateDegrees = (rotateCounter, activeNumber) => {
-  const animateDegree = numbers.findIndex(v => v === activeNumber) * rotateDegreePerNumber;
+const calculateDegrees = (rotateCounter: number, activeNumber: number): Partial<State> => {
+  const animateDegree = numbers.findIndex((v) => v === activeNumber) * rotateDegreePerNumber;
   const amountDegree = rotateCounter * revolutionDegrees;
 
   return {
@@ -48,31 +47,23 @@ const calculateDegrees = (rotateCounter, activeNumber) => {
   };
 };
 
-export default class FlipNumber extends React.Component<Props, State> {
-  static getDerivedStateFromProps({ activeNumber }: Props, { rotateCounter }: State) {
-    return calculateDegrees(rotateCounter, activeNumber);
+export default class FlipNumber extends React.PureComponent<FlipNumberProps, State> {
+  static getDerivedStateFromProps({ activeNumber }: FlipNumberProps, { rotateCounter, prevActiveNumber }: State) {
+    // This runs on every update, so only rotate when the digit actually changes. Otherwise a digit
+    // resting on 0 would gain a full revolution each time the parent re-renders.
+    if (activeNumber === prevActiveNumber) return null;
+    return { ...calculateDegrees(rotateCounter, activeNumber), prevActiveNumber: activeNumber };
   }
 
-  state = {
+  state: State = {
     degree: 0,
-    rotateCounter: 0, // eslint-disable-line react/no-unused-state
+    rotateCounter: 0,
   };
 
-  updateNumberTimeout: TimeoutID;
+  updateNumberTimeout?: ReturnType<typeof setTimeout>;
 
   componentDidMount() {
     this.updateNumberTimeout = setTimeout(() => this.updateNumber(), 50 * this.props.position);
-  }
-
-  shouldComponentUpdate(nextProps: Props) {
-    return (
-      nextProps.className !== this.props.className ||
-      nextProps.activeNumber !== this.props.activeNumber ||
-      nextProps.height !== this.props.height ||
-      nextProps.width !== this.props.width ||
-      this.state.degree === 0 ||
-      nextProps.play !== this.props.play
-    );
   }
 
   componentWillUnmount() {
@@ -80,16 +71,15 @@ export default class FlipNumber extends React.Component<Props, State> {
   }
 
   updateNumber = () => {
-    this.setState(({ rotateCounter }) => calculateDegrees(rotateCounter, this.props.activeNumber));
+    this.setState(({ rotateCounter }) => calculateDegrees(rotateCounter, this.props.activeNumber) as State);
   };
 
   render() {
     const {
       activeNumber,
-      height,
+      fontSize,
       color,
       background,
-      width,
       perspective,
       duration,
       play,
@@ -100,12 +90,13 @@ export default class FlipNumber extends React.Component<Props, State> {
       className,
     } = this.props;
     const { degree } = this.state;
-    const viewPortSize = {
-      width: `${width}px`,
-      height: `${height + 3}px`,
+    const height = fontSize;
+    const viewPortSize: React.CSSProperties = {
+      width: '1ch',
+      height: `${height}px`,
+      fontSize: `${fontSize}px`,
     };
-    const halfElementHeight = height / 2;
-    const translateZ = halfElementHeight + height;
+    const translateZ = height * 1.5;
 
     return (
       <span
@@ -115,13 +106,11 @@ export default class FlipNumber extends React.Component<Props, State> {
           overflow: 'hidden',
           display: 'inline-block',
           textAlign: 'left',
-          height,
         }}
         className={className}
         aria-hidden
       >
         <Animate
-          tag="span"
           play={play}
           start={{
             ...commonAnimateStyle,
@@ -137,9 +126,7 @@ export default class FlipNumber extends React.Component<Props, State> {
                 <span
                   style={{
                     ...viewPortSize,
-                    height,
                     lineHeight: `${height}px`,
-                    fontSize: `${height - 1}px`,
                     position: 'absolute',
                     display: 'flex',
                     justifyContent: 'center',
@@ -163,12 +150,9 @@ export default class FlipNumber extends React.Component<Props, State> {
         />
 
         <span
-          data={length - position}
           style={{
             ...viewPortSize,
-            height,
             lineHeight: `${height}px`,
-            fontSize: `${height - 1}px`,
             left: `${length - position > 4 ? 0.25 : 0}px`, // hacky fix for weird misalignment in Chrome.
             position: 'absolute',
             display: 'flex',

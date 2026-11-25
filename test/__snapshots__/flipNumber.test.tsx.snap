@@ -4,47 +4,49 @@ exports[`FlipNumber should render correctly 1`] = `
 <span
   aria-hidden={true}
   style={
-    Object {
+    {
       "display": "inline-block",
-      "height": 20,
+      "fontSize": "20px",
+      "height": "20px",
       "overflow": "hidden",
-      "perspective": "1000px",
+      "perspective": 1000,
       "textAlign": "left",
-      "width": "20px",
+      "width": "1ch",
     }
   }
 >
   <Animate
+    delay={0}
+    duration={0.3}
     easeType="cubic-bezier(0.19, 1, 0.22, 1)"
     end={
-      Object {
+      {
         "height": "100%",
         "position": "absolute",
         "transform": "rotateX(0deg)",
         "transformStyle": "preserve-3d",
       }
     }
+    play={true}
     render={[Function]}
     start={
-      Object {
+      {
         "height": "100%",
         "position": "absolute",
         "transformStyle": "preserve-3d",
       }
     }
-    tag="span"
   />
   <span
-    data={NaN}
     style={
-      Object {
+      {
         "WebkitFontSmoothing": "antialiased",
         "alignItems": "center",
         "background": "black",
         "color": "white",
         "display": "flex",
-        "fontSize": "19px",
-        "height": 20,
+        "fontSize": "20px",
+        "height": "20px",
         "justifyContent": "center",
         "left": "0px",
         "lineHeight": "20px",
@@ -52,7 +54,7 @@ exports[`FlipNumber should render correctly 1`] = `
         "textAlign": "center",
         "transform": "rotateX(0deg) translateZ(30px)",
         "visibility": "hidden",
-        "width": "20px",
+        "width": "1ch",
       }
     }
   >
@@ -65,47 +67,49 @@ exports[`FlipNumber should return the correct position for matching number 1`] =
 <span
   aria-hidden={true}
   style={
-    Object {
+    {
       "display": "inline-block",
-      "height": 20,
+      "fontSize": "20px",
+      "height": "20px",
       "overflow": "hidden",
-      "perspective": "1000px",
+      "perspective": 1000,
       "textAlign": "left",
-      "width": "20px",
+      "width": "1ch",
     }
   }
 >
   <Animate
+    delay={0}
+    duration={0.3}
     easeType="cubic-bezier(0.19, 1, 0.22, 1)"
     end={
-      Object {
+      {
         "height": "100%",
         "position": "absolute",
         "transform": "rotateX(-72deg)",
         "transformStyle": "preserve-3d",
       }
     }
+    play={true}
     render={[Function]}
     start={
-      Object {
+      {
         "height": "100%",
         "position": "absolute",
         "transformStyle": "preserve-3d",
       }
     }
-    tag="span"
   />
   <span
-    data={NaN}
     style={
-      Object {
+      {
         "WebkitFontSmoothing": "antialiased",
         "alignItems": "center",
         "background": "black",
         "color": "white",
         "display": "flex",
-        "fontSize": "19px",
-        "height": 20,
+        "fontSize": "20px",
+        "height": "20px",
         "justifyContent": "center",
         "left": "0px",
         "lineHeight": "20px",
@@ -113,7 +117,7 @@ exports[`FlipNumber should return the correct position for matching number 1`] =
         "textAlign": "center",
         "transform": "rotateX(0deg) translateZ(30px)",
         "visibility": "hidden",
-        "width": "20px",
+        "width": "1ch",
       }
     }
   >
