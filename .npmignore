@@ -5,8 +5,8 @@ test/
 .babelrc
 .flowconfig
 .npmignore
-yarn-error.log
-yarn.lock
+pnpm-workspace.yaml
+pnpm-lock.yaml
 .idea/
 CONTRIBUTING.md
 .eslintrc

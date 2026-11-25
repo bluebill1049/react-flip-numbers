@@ -12,15 +12,16 @@
   "scripts": {
     "clean": "rimraf lib/",
     "release": "npm version",
-    "postrelease": "yarn publish && git push --follow-tags",
+    "postrelease": "pnpm publish && git push --follow-tags",
     "test": "jest",
-    "testw": "yarn test -- --watchAll",
+    "testw": "pnpm test --watchAll",
     "coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "build": "rollup -c",
     "lint": "eslint ./src",
-    "prepublish": "yarn test && yarn flow && yarn lint && yarn run clean && yarn build",
-    "flow": "flow"
+    "flow": "flow",
+    "prepublishOnly": "pnpm test && pnpm flow && pnpm lint && pnpm clean && pnpm build"
   },
+  "packageManager": "pnpm@12.23.0",
   "repository": "https://github.com/bluebill1049/react-flip-numbers.git",
   "author": "beier luo",
   "license": "Mit",
