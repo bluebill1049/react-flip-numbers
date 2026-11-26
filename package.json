@@ -14,8 +14,6 @@
   ],
   "scripts": {
     "clean": "rimraf lib/",
-    "release": "npm version",
-    "postrelease": "pnpm publish && git push --follow-tags",
     "test": "jest",
     "testw": "pnpm test --watchAll",
     "coverage": "jest --coverage --coverageReporters=text-lcov | coveralls",

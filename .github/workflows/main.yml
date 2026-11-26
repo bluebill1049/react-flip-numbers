@@ -1,0 +1,84 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    paths-ignore:
+      - '.gitignore'
+      - '*.md'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: ${{ matrix.task.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        task:
+          - name: Lint and types
+            run: pnpm lint && pnpm typecheck
+          - name: Test
+            run: pnpm test
+          - name: Build
+            run: pnpm build
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: ${{ matrix.task.name }}
+        run: ${{ matrix.task.run }}
+
+  publish-module:
+    name: Publish Module to NPM
+    needs: build
+    if: github.repository == 'bluebill1049/react-flip-numbers' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # tags and GitHub releases
+      issues: write # release comments on issues
+      pull-requests: write # release comments on PRs
+      id-token: write # npm trusted publishing (OIDC) and provenance
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Publish
+        run: pnpm dlx semantic-release
+        env:
+          # npm auth uses trusted publishing (OIDC); no NPM_TOKEN needed.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
