@@ -2,16 +2,22 @@
   "name": "example",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-flip-numbers": "3.0.1-beta.3",
-    "react-scripts": "1.1.4"
-  },
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-flip-numbers": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.1",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.8"
   }
 }

@@ -1,52 +1,67 @@
-# React Flip Numbers
+<div align="center">
+  <a href="https://github.com/bluebill1049/react-flip-numbers" title="React Flip Numbers">
+    <img src="logo.svg" alt="React Flip Numbers" width="96" />
+  </a>
+</div>
 
-[![Coverage Status](https://coveralls.io/repos/github/bluebill1049/react-flip-numbers/badge.svg?branch=master)](https://coveralls.io/github/bluebill1049/react-flip-numbers?branch=master)
-[![npm version](https://img.shields.io/npm/v/react-flip-numbers.svg?style=flat-square)](https://www.npmjs.com/package/react-flip-numbers)
-[![npm downloads](https://img.shields.io/npm/dm/react-flip-numbers.svg?style=flat-square)](https://www.npmjs.com/package/react-flip-numbers)
-[![npm](https://img.shields.io/npm/dt/react-flip-numbers.svg?style=flat-square)](https://www.npmjs.com/package/react-flip-numbers)
-[![npm](https://badgen.net/bundlephobia/minzip/react-flip-numbers)](https://badgen.net/bundlephobia/minzip/react-flip-numbers)
+<p align="center">Flip your numbers in 3D for React.</p>
 
-> **Make number animation looks sexy** :clap:
+<div align="center">
 
-- Flip your numbers in 3D space
-- Super easy to use
+[![npm downloads](https://img.shields.io/npm/dm/react-flip-numbers.svg?style=for-the-badge)](https://www.npmjs.com/package/react-flip-numbers)
+[![npm](https://img.shields.io/npm/dt/react-flip-numbers.svg?style=for-the-badge)](https://www.npmjs.com/package/react-flip-numbers)
+[![License](https://img.shields.io/npm/l/react-flip-numbers?style=for-the-badge)](https://github.com/bluebill1049/react-flip-numbers/blob/master/LICENSE)
 
-## Install
-
-    npm install react-flip-numbers -S
+</div>
 
 <p align="center">
-    <img width="600" src="https://raw.githubusercontent.com/bluebill1049/react-flip-numbers/master/react-flip-numbers.gif" alt="react flip numbers" />
+  <a href="#quickstart">Quickstart</a> |
+  <a href="#api">API</a> |
+  <a href="./example">Example</a>
 </p>
 
-## Quickstart
+<p align="center">
+  <img width="600" src="https://raw.githubusercontent.com/bluebill1049/react-flip-numbers/master/react-flip-numbers.gif" alt="react flip numbers demo" />
+</p>
 
-```jsx
-import react from 'react';
-import FlipNumbers from 'react-flip-numbers';
+### Features
 
-export default () => {
-  return <FlipNumbers height={12} width={12} color="red" background="white" play perspective={100} numbers="12345" />;
-};
+- 3D flip animation for any string of digits, with separators like `:` and `,` left in place
+- Sized by a single `fontSize` prop, with an adjustable `gap` between digits
+- Written in TypeScript, types included
+- Supports React 16.8 through 19
+
+### Install
+
+```sh
+npm install react-flip-numbers
 ```
 
-## API
+### Quickstart
 
-| Prop             | Type    | Required | Description                              |
-| :--------------- | :------ | :------: | :--------------------------------------- |
-| `numbers`        | string  |    ✓     |                                          |
-| `play`           | boolean |    ✓     | Start the animation                      |  |
-| `height`         | number  |    ✓     | Individual number height                 |
-| `width`          | number  |    ✓     | Individual number width                  |
-| `color`          | string  |    ✓     | Number color                             |
-| `background`     | string  |          | Background color                         |
-| `perspective`    | number  |          | CSS 3D transition perspective            |
-| `nonNumberStyle` | string  |          | CSS inline style for not number eg , : . |
-| `numberStyle`    | string  |          | CSS inline style for number              |
-| `duration`       | number  |          |                                          |
-| `delay`          | number  |          |                                          |
+```tsx
+import FlipNumbers from 'react-flip-numbers';
 
+function Counter() {
+  return <FlipNumbers play numbers="12345" fontSize={40} gap={4} color="#fff" background="#333" />;
+}
+```
 
-## By the makers of BEEKAI
+### API
 
-We also make [BEEKAI](https://www.beekai.com/). Build the next-generation forms with modern technology and best in class user experience and accessibility.
+| Prop                 | Type                  | Default            | Description                                         |
+| :------------------- | :-------------------- | :----------------- | :-------------------------------------------------- |
+| `numbers`            | `string`              | required           | The value to display, e.g. `"12:30"`                |
+| `fontSize`           | `number`              | required           | Font size in px; sets each digit's size             |
+| `color`              | `string`              | required           | Digit color                                         |
+| `play`               | `boolean`             | `false`            | Run the flip animation                              |
+| `gap`                | `number \| string`    | 10% of `fontSize`  | Space between digits; a number is px, or any CSS length |
+| `background`         | `string`              |                    | Digit background color                              |
+| `perspective`        | `number`              | `500`              | CSS 3D perspective in px                            |
+| `duration`           | `number`              | `0.3`              | Animation duration in seconds                       |
+| `delay`              | `number`              | `0`                | Animation delay in seconds                          |
+| `animate`            | `boolean`             | `true`             | Set `false` to render plain digits                  |
+| `numberStyle`        | `CSSProperties`       |                    | Inline style for each digit                         |
+| `nonNumberStyle`     | `CSSProperties`       |                    | Inline style for separators like `:` `,` `.`        |
+| `numberClassName`    | `string`              |                    | Class name for each digit                           |
+| `nonNumberClassName` | `string`              |                    | Class name for separators                           |

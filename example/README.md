@@ -1,7 +1,10 @@
-# React flip numbers
+# React flip numbers example
+
+A Vite + TypeScript app that runs against the library source in `../src`, so changes there hot-reload.
 
 ## Install and start
 
-    $ yarn && yarn start
-    or
-    $ npm install && npm start 
+From the repository root:
+
+    $ pnpm install
+    $ pnpm --filter example start

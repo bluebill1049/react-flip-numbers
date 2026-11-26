@@ -1,4 +1,8 @@
+packages:
+  - example
+
 allowBuilds:
+  '@parcel/watcher': false
   core-js: false
   core-js-pure: false
   fsevents: false
